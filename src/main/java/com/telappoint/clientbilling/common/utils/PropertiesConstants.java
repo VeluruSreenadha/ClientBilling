@@ -3,7 +3,8 @@ package com.telappoint.clientbilling.common.utils;
 public enum PropertiesConstants {
 
 	APPT_CLIENT_BILLING_PROP("apptRestService.properties"),
-	CONFIG("config.properties");
+	CONFIG("config.properties"),
+	COMMON_DB("commondb.properties");
 	private String propertyFileName;
 	
 	private PropertiesConstants(String propertyFileName) {

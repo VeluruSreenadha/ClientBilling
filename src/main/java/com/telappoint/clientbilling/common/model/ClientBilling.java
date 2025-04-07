@@ -21,15 +21,15 @@ public class ClientBilling {
 	private Integer payment_outbound_offset;
 	private Integer payment_sms_offset;
 	private Integer payment_email_offset;
-	private Long tax_rate;
-	private char penalty_flag;
-	private Long penalty_rate;
-	private Long penalty_flat;
+	private Double tax_rate;
+	private String penalty_flag;
+	private Double penalty_rate;
+	private Double penalty_flat;
 	private Integer payment_mode_id;
 	private Integer remind_unpaid_invoice_days;
-	private char monthly_recurring;
+	private String monthly_recurring;
 	private Integer placement;
-	private char delete_flag;
+	private String delete_flag;
 	private String invoice_send_date;
 	private String invoice_end_date;
 	private String annual_quarterly_next_billing_date;
@@ -37,9 +37,9 @@ public class ClientBilling {
 	private String annual_quarterly_next_invoice_ending_date;
 	private String last_invoice_date;
 	private String last_invoice_due_date;
-	private Long last_invoice_amount;
-	private Long balance_due;
-	private char automatic_billing;
+	private Double last_invoice_amount;
+	private Double balance_due;
+	private String automatic_billing;
 	private String country;
 	private String currency;
 	private String date_format;
@@ -163,28 +163,28 @@ public class ClientBilling {
 	public void setPayment_email_offset(Integer payment_email_offset) {
 		this.payment_email_offset = payment_email_offset;
 	}
-	public Long getTax_rate() {
+	public Double getTax_rate() {
 		return tax_rate;
 	}
-	public void setTax_rate(Long tax_rate) {
+	public void setTax_rate(Double tax_rate) {
 		this.tax_rate = tax_rate;
 	}
-	public char getPenalty_flag() {
+	public String getPenalty_flag() {
 		return penalty_flag;
 	}
-	public void setPenalty_flag(char penalty_flag) {
+	public void setPenalty_flag(String penalty_flag) {
 		this.penalty_flag = penalty_flag;
 	}
-	public Long getPenalty_rate() {
+	public Double getPenalty_rate() {
 		return penalty_rate;
 	}
-	public void setPenalty_rate(Long penalty_rate) {
+	public void setPenalty_rate(Double penalty_rate) {
 		this.penalty_rate = penalty_rate;
 	}
-	public Long getPenalty_flat() {
+	public Double getPenalty_flat() {
 		return penalty_flat;
 	}
-	public void setPenalty_flat(Long penalty_flat) {
+	public void setPenalty_flat(Double penalty_flat) {
 		this.penalty_flat = penalty_flat;
 	}
 	public Integer getPayment_mode_id() {
@@ -199,10 +199,10 @@ public class ClientBilling {
 	public void setRemind_unpaid_invoice_days(Integer remind_unpaid_invoice_days) {
 		this.remind_unpaid_invoice_days = remind_unpaid_invoice_days;
 	}
-	public char getMonthly_recurring() {
+	public String getMonthly_recurring() {
 		return monthly_recurring;
 	}
-	public void setMonthly_recurring(char monthly_recurring) {
+	public void setMonthly_recurring(String monthly_recurring) {
 		this.monthly_recurring = monthly_recurring;
 	}
 	public Integer getPlacement() {
@@ -211,10 +211,10 @@ public class ClientBilling {
 	public void setPlacement(Integer placement) {
 		this.placement = placement;
 	}
-	public char getDelete_flag() {
+	public String getDelete_flag() {
 		return delete_flag;
 	}
-	public void setDelete_flag(char delete_flag) {
+	public void setDelete_flag(String delete_flag) {
 		this.delete_flag = delete_flag;
 	}
 	public String getInvoice_send_date() {
@@ -259,22 +259,22 @@ public class ClientBilling {
 	public void setLast_invoice_due_date(String last_invoice_due_date) {
 		this.last_invoice_due_date = last_invoice_due_date;
 	}
-	public Long getLast_invoice_amount() {
+	public Double getLast_invoice_amount() {
 		return last_invoice_amount;
 	}
-	public void setLast_invoice_amount(Long last_invoice_amount) {
+	public void setLast_invoice_amount(Double last_invoice_amount) {
 		this.last_invoice_amount = last_invoice_amount;
 	}
-	public Long getBalance_due() {
+	public Double getBalance_due() {
 		return balance_due;
 	}
-	public void setBalance_due(Long balance_due) {
+	public void setBalance_due(Double balance_due) {
 		this.balance_due = balance_due;
 	}
-	public char getAutomatic_billing() {
+	public String getAutomatic_billing() {
 		return automatic_billing;
 	}
-	public void setAutomatic_billing(char automatic_billing) {
+	public void setAutomatic_billing(String automatic_billing) {
 		this.automatic_billing = automatic_billing;
 	}
 	public String getCountry() {

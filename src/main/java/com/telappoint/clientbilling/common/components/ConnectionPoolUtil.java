@@ -60,20 +60,32 @@ public class ConnectionPoolUtil {
 	}
 
 	private JdbcCustomTemplate getNewJdbcCustomTemplate() throws TelAppointException, Exception {
+		String username = PropertyUtils.getValueFromProperties("app.jdbc.billing.username",
+				PropertiesConstants.COMMON_DB.getPropertyFileName());
+		String password = PropertyUtils.getValueFromProperties("app.jdbc.billing.password",
+				PropertiesConstants.COMMON_DB.getPropertyFileName());
+		String url = PropertyUtils.getValueFromProperties("app.jdbc.billing.url",
+				PropertiesConstants.COMMON_DB.getPropertyFileName());
 		JdbcCustomTemplate jdbcCustomTemplate = null;
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		try {
 			Class.forName(ConnectionPoolUtil.DRIVER).newInstance();
 			GenericObjectPool connectionPool = new GenericObjectPool();
-			connectionPool
-					.setMaxActive(Integer.valueOf(PropertyUtils.getValueFromProperties("MAX_ACTIVE", PropertiesConstants.APPT_CLIENT_BILLING_PROP.getPropertyFileName())));
-			connectionPool.setMaxIdle(Integer.valueOf(PropertyUtils.getValueFromProperties("MIN_IDLE", PropertiesConstants.APPT_CLIENT_BILLING_PROP.getPropertyFileName())));
+			connectionPool.setMaxActive(Integer.valueOf(PropertyUtils.getValueFromProperties("MAX_ACTIVE",
+					PropertiesConstants.APPT_CLIENT_BILLING_PROP.getPropertyFileName())));
+			connectionPool.setMaxIdle(Integer.valueOf(PropertyUtils.getValueFromProperties("MIN_IDLE",
+					PropertiesConstants.APPT_CLIENT_BILLING_PROP.getPropertyFileName())));
 
-			String testOnBorrow = PropertyUtils.getValueFromProperties("testOnBorrow", PropertiesConstants.APPT_CLIENT_BILLING_PROP.getPropertyFileName());
-			String validationQuery = PropertyUtils.getValueFromProperties("validationQuery", PropertiesConstants.APPT_CLIENT_BILLING_PROP.getPropertyFileName());
-			String validationInterval = PropertyUtils.getValueFromProperties("validationInterval", PropertiesConstants.APPT_CLIENT_BILLING_PROP.getPropertyFileName());
-			String removeAbandoned = PropertyUtils.getValueFromProperties("removeAbandoned", PropertiesConstants.APPT_CLIENT_BILLING_PROP.getPropertyFileName());
-			String removeAbandonedTimeout = PropertyUtils.getValueFromProperties("removeAbandonedTimeout", PropertiesConstants.APPT_CLIENT_BILLING_PROP.getPropertyFileName());
+			String testOnBorrow = PropertyUtils.getValueFromProperties("testOnBorrow",
+					PropertiesConstants.APPT_CLIENT_BILLING_PROP.getPropertyFileName());
+			String validationQuery = PropertyUtils.getValueFromProperties("validationQuery",
+					PropertiesConstants.APPT_CLIENT_BILLING_PROP.getPropertyFileName());
+			String validationInterval = PropertyUtils.getValueFromProperties("validationInterval",
+					PropertiesConstants.APPT_CLIENT_BILLING_PROP.getPropertyFileName());
+			String removeAbandoned = PropertyUtils.getValueFromProperties("removeAbandoned",
+					PropertiesConstants.APPT_CLIENT_BILLING_PROP.getPropertyFileName());
+			String removeAbandonedTimeout = PropertyUtils.getValueFromProperties("removeAbandonedTimeout",
+					PropertiesConstants.APPT_CLIENT_BILLING_PROP.getPropertyFileName());
 			String timeBetweenEvictionRunsMillis = PropertyUtils.getValueFromProperties("timeBetweenEvictionRunsMillis",
 					PropertiesConstants.APPT_CLIENT_BILLING_PROP.getPropertyFileName());
 
@@ -92,16 +104,15 @@ public class ConnectionPoolUtil {
 
 			connectionPool.setTestOnBorrow(Boolean.valueOf(testOnBorrow));
 			Properties props = new Properties();
-			props.put("user", propertySource.getBillingUserName());
-			props.put("password", propertySource.getBillingPassword());
+			props.put("user", username);
+			props.put("password", password);
 			props.put("autoReconnect", true);
 			props.put("validationQuery", validationQuery);
 			props.put("validationInterval", Long.valueOf(validationInterval));
 			props.put("removeAbandoned", Boolean.valueOf(removeAbandoned));
 			props.put("removeAbandonedTimeout", Long.valueOf(removeAbandonedTimeout));
 			props.put("timeBetweenEvictionRunsMillis", Long.valueOf(timeBetweenEvictionRunsMillis));
-			ConnectionFactory cf = new DriverManagerConnectionFactory(
-					"jdbc:mysql://" + propertySource.getBillingConnectUri(), props);
+			ConnectionFactory cf = new DriverManagerConnectionFactory("jdbc:mysql://" + url, props);
 			new PoolableConnectionFactory(cf, connectionPool, null, null, true, true);
 			DataSource dataSource = new PoolingDataSource(connectionPool);
 			jdbcTemplate.setDataSource(dataSource);
